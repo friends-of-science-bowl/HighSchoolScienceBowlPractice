@@ -1,14 +1,34 @@
 PODS:
-  - Charts (3.0.2):
-    - Charts/Core (= 3.0.2)
-  - Charts/Core (3.0.2)
+  - Charts (3.2.2):
+    - Charts/Core (= 3.2.2)
+  - Charts/Core (3.2.2)
+  - Down (0.6.3)
+  - iosMath (0.9.4)
+  - RichTextView (1.0.8):
+    - Down
+    - iosMath
+    - SnapKit
+  - SnapKit (4.2.0)
 
 DEPENDENCIES:
   - Charts
+  - RichTextView
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Charts
+    - Down
+    - iosMath
+    - RichTextView
+    - SnapKit
 
 SPEC CHECKSUMS:
-  Charts: 236d6ccdd0ce6feae151d89e829a7397381a21fd
+  Charts: f69cf0518b6d1d62608ca504248f1bbe0b6ae77e
+  Down: 184b7330d41cbbe53f96d87bdff4f4432579a159
+  iosMath: f7a6cbadf9d836d2149c2a84c435b1effc244cba
+  RichTextView: 076c15a1d80620a24be276b13c2781702fc44f57
+  SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
 
-PODFILE CHECKSUM: 8bf523ae2d864f8aea3c7ada09e50b9fd59b9a73
+PODFILE CHECKSUM: 5368248c8436e47bcbb87b8f7b7403b0ec3abf0e
 
-COCOAPODS: 1.2.1
+COCOAPODS: 1.6.1
