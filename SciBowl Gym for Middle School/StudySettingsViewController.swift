@@ -50,17 +50,17 @@ class StudySettingsViewController: UIViewController, UIPickerViewDataSource, UIP
         return button
     }()
     
-    @objc lazy var chemistryButton: UIButton = {
+    @objc lazy var generalScienceButton: UIButton = {
         let button = UIButton(type: .custom)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Chemistry", for: .normal)
+        button.setTitle("General Science", for: .normal)
         button.setBackgroundColor(color: StudySettingsViewController.lightGrey, forState: .normal)
         button.setBackgroundColor(color: StudySettingsViewController.darkGrey, forState: .selected)
         button.tintColor = UIColor.white
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15.0, weight: UIFont.Weight.light)
         button.clipsToBounds = true
         button.layer.cornerRadius = 10
-        button.addTarget(self, action: #selector(StudySettingsViewController.toggleChemistry), for: .touchUpInside)
+        button.addTarget(self, action: #selector(StudySettingsViewController.togglegeneralScience), for: .touchUpInside)
         return button
     }()
     
@@ -209,12 +209,12 @@ class StudySettingsViewController: UIViewController, UIPickerViewDataSource, UIP
             biologyButton.trailingAnchor.constraint(equalTo: view.centerXAnchor, constant: -15)
         ])
         
-        scrollView.addSubview(chemistryButton)
+        scrollView.addSubview(generalScienceButton)
         NSLayoutConstraint.activate([
-            chemistryButton.widthAnchor.constraint(equalToConstant: 130),
-            chemistryButton.heightAnchor.constraint(equalToConstant: 44),
-            chemistryButton.topAnchor.constraint(equalTo: topicHeader.bottomAnchor, constant: 7),
-            chemistryButton.leadingAnchor.constraint(equalTo: view.centerXAnchor, constant: 15)
+            generalScienceButton.widthAnchor.constraint(equalToConstant: 130),
+            generalScienceButton.heightAnchor.constraint(equalToConstant: 44),
+            generalScienceButton.topAnchor.constraint(equalTo: topicHeader.bottomAnchor, constant: 7),
+            generalScienceButton.leadingAnchor.constraint(equalTo: view.centerXAnchor, constant: 15)
         ])
         
         scrollView.addSubview(earthAndSpaceButton)
@@ -229,8 +229,8 @@ class StudySettingsViewController: UIViewController, UIPickerViewDataSource, UIP
         NSLayoutConstraint.activate([
             energyButton.widthAnchor.constraint(equalToConstant: 130),
             energyButton.heightAnchor.constraint(equalToConstant: 44),
-            energyButton.topAnchor.constraint(equalTo: chemistryButton.bottomAnchor, constant: 10),
-            energyButton.trailingAnchor.constraint(equalTo: chemistryButton.trailingAnchor)
+            energyButton.topAnchor.constraint(equalTo: generalScienceButton.bottomAnchor, constant: 10),
+            energyButton.trailingAnchor.constraint(equalTo: generalScienceButton.trailingAnchor)
         ])
         
         scrollView.addSubview(mathButton)
@@ -308,7 +308,7 @@ class StudySettingsViewController: UIViewController, UIPickerViewDataSource, UIP
     
     @objc func toggleOff() {
         biologyButton.isSelected = false
-        chemistryButton.isSelected = false
+        generalScienceButton.isSelected = false
         earthAndSpaceButton.isSelected = false
         energyButton.isSelected = false
         mathButton.isSelected = false
@@ -322,10 +322,10 @@ class StudySettingsViewController: UIViewController, UIPickerViewDataSource, UIP
         category = Category.biology
     }
     
-    @objc func toggleChemistry() {
+    @objc func togglegeneralScience() {
         toggleOff()
-        chemistryButton.isSelected = true
-        category = Category.chemistry
+        generalScienceButton.isSelected = true
+        category = Category.generalScience
     }
     
     @objc func toggleEarthAndSpace() {
@@ -361,8 +361,8 @@ class StudySettingsViewController: UIViewController, UIPickerViewDataSource, UIP
     func getCategoryForToggle() -> Category? {
         if biologyButton.isSelected {
             return Category.biology
-        } else if chemistryButton.isSelected {
-            return Category.chemistry
+        } else if generalScienceButton.isSelected {
+            return Category.generalScience
         } else if earthAndSpaceButton.isSelected {
             return Category.earthAndSpace
         } else if energyButton.isSelected {
