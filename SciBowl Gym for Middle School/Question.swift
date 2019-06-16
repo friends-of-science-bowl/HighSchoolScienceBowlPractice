@@ -67,16 +67,22 @@ struct Question {
 func convert(_ orig: String) -> String {
     var result = String()
     var math = false
+    var escape = false
     for char in orig {
-        if char == "$" {
+        if !escape && char == "$" {
             if math {
                 math = false
-                result += "[/math]"
+                result += "[/math]&nbsp;"
             } else {
                 math = true
-                result += "[math]"
+                result += "&nbsp;[math]"
             }
         } else {
+            if !escape && char == "\\" {
+                escape = true
+            } else {
+                escape = false
+            }
             result.append(char)
         }
     }
