@@ -25,7 +25,7 @@ struct QuestionJSONParser {
     
     static func parseJSONToQuestions() -> [Question] {
         var questionArray = [Question]()
-        let parsedJSON = QuestionJSONParser.parseJsonFile(withName: "questions")
+        let parsedJSON = parseJsonFile(withName: "questions")
         for questionJSON in parsedJSON {
             if let parsedQuestion = Question(json: questionJSON) {
                 questionArray.append(parsedQuestion)
@@ -71,16 +71,6 @@ struct QuestionJSONParser {
             }
         }
         // Will never reach this state because of limited round number selections
-    }
-    
-    func getQuestionForSet(_ set: Int, andRound round: Int) -> Question {
-        while true {
-            let question = QuestionJSONParser.shared.getRandomQuestion()
-            if question.setNumber == set && question.roundNumber == round {
-                return question
-            }
-        }
-        // Will never reach this state because of limited set and round selections
     }
     
     func getQuestionSet(_ set: Int, forRound round: Int) -> [Question] {

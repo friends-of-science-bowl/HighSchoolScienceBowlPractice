@@ -79,7 +79,7 @@ class StudyModeViewController: UIViewController {
     
     @objc lazy var questionTextLabel: UIView = {
         let label = RichTextView(
-            font: UIFont.systemFont(ofSize: 17.0, weight: UIFont.Weight.medium),
+            font: UIFont.systemFont(ofSize: 16.0, weight: UIFont.Weight.medium),
             textColor: UIColor.white,
             frame: CGRect.zero
         )

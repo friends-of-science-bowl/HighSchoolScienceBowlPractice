@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RichTextView
 import UIKit
 
 extension Question {

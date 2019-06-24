@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1C2985C81F1EABCC007F96FC /* ReaderModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2985C71F1EABCC007F96FC /* ReaderModeViewController.swift */; };
-		1C2985CA1F1EB94A007F96FC /* ReaderSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2985C91F1EB94A007F96FC /* ReaderSettingsViewController.swift */; };
+		1C2985C81F1EABCC007F96FC /* ModeratorModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2985C71F1EABCC007F96FC /* ModeratorModeViewController.swift */; };
+		1C2985CA1F1EB94A007F96FC /* ModeratorSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2985C91F1EB94A007F96FC /* ModeratorSettingsViewController.swift */; };
 		1C2985CC1F1EE64B007F96FC /* StudySettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2985CB1F1EE64B007F96FC /* StudySettingsViewController.swift */; };
 		1C2985CE1F1EE7B1007F96FC /* StudyModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2985CD1F1EE7B1007F96FC /* StudyModeViewController.swift */; };
 		1CAD658A1F1573C100D1A289 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAD65891F1573C100D1A289 /* AppDelegate.swift */; };
@@ -42,8 +42,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1C2985C71F1EABCC007F96FC /* ReaderModeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReaderModeViewController.swift; path = "SciBowl Gym for Middle School/ReaderModeViewController.swift"; sourceTree = "<group>"; };
-		1C2985C91F1EB94A007F96FC /* ReaderSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReaderSettingsViewController.swift; path = "SciBowl Gym for Middle School/ReaderSettingsViewController.swift"; sourceTree = SOURCE_ROOT; };
+		1C2985C71F1EABCC007F96FC /* ModeratorModeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ModeratorModeViewController.swift; path = "SciBowl Gym for Middle School/ModeratorModeViewController.swift"; sourceTree = "<group>"; };
+		1C2985C91F1EB94A007F96FC /* ModeratorSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ModeratorSettingsViewController.swift; path = "SciBowl Gym for Middle School/ModeratorSettingsViewController.swift"; sourceTree = SOURCE_ROOT; };
 		1C2985CB1F1EE64B007F96FC /* StudySettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StudySettingsViewController.swift; path = "SciBowl Gym for Middle School/StudySettingsViewController.swift"; sourceTree = "<group>"; };
 		1C2985CD1F1EE7B1007F96FC /* StudyModeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StudyModeViewController.swift; path = "SciBowl Gym for Middle School/StudyModeViewController.swift"; sourceTree = SOURCE_ROOT; };
 		1CAD65861F1573C100D1A289 /* SciBowl Gym for Middle School.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SciBowl Gym for Middle School.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -129,8 +129,8 @@
 				1CAD65A01F158B3100D1A289 /* QuizModeViewController.swift */,
 				844E83381F2170150081555B /* QuizSettingsViewController.swift */,
 				844E833C1F2190820081555B /* QuizModeStatsViewController.swift */,
-				1C2985C71F1EABCC007F96FC /* ReaderModeViewController.swift */,
-				1C2985C91F1EB94A007F96FC /* ReaderSettingsViewController.swift */,
+				1C2985C71F1EABCC007F96FC /* ModeratorModeViewController.swift */,
+				1C2985C91F1EB94A007F96FC /* ModeratorSettingsViewController.swift */,
 				1C2985CD1F1EE7B1007F96FC /* StudyModeViewController.swift */,
 				1C2985CB1F1EE64B007F96FC /* StudySettingsViewController.swift */,
 				844E83361F2119C60081555B /* MainMenuViewController.swift */,
@@ -281,14 +281,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1C2985CA1F1EB94A007F96FC /* ReaderSettingsViewController.swift in Sources */,
+				1C2985CA1F1EB94A007F96FC /* ModeratorSettingsViewController.swift in Sources */,
 				1CAD65A41F158B6D00D1A289 /* QuestionJSONParser.swift in Sources */,
 				844E83371F2119C60081555B /* MainMenuViewController.swift in Sources */,
 				844E833B1F218C660081555B /* QuizModeStats.swift in Sources */,
 				844E833D1F2190820081555B /* QuizModeStatsViewController.swift in Sources */,
 				844E83391F2170150081555B /* QuizSettingsViewController.swift in Sources */,
 				1CAD659D1F1581AB00D1A289 /* Question.swift in Sources */,
-				1C2985C81F1EABCC007F96FC /* ReaderModeViewController.swift in Sources */,
+				1C2985C81F1EABCC007F96FC /* ModeratorModeViewController.swift in Sources */,
 				1CAD658A1F1573C100D1A289 /* AppDelegate.swift in Sources */,
 				8477B66F1F230E3300E2791F /* HelpPageViewController.swift in Sources */,
 				1CAD659F1F1581C200D1A289 /* Category.swift in Sources */,

@@ -164,7 +164,7 @@ class MainMenuViewController: UIViewController {
     }
     
     @objc func startReaderMode() {
-        let readerSettingsController = ReaderSettingsViewController()
+        let readerSettingsController = ModeratorSettingsViewController()
         let navigationController = UINavigationController(rootViewController: readerSettingsController)
         self.present(navigationController, animated: true, completion: nil)
     }

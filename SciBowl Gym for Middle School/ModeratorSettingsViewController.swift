@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ReaderSettingsViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+class ModeratorSettingsViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     @objc static let lightGrey = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.25)
     @objc static let darkGrey = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.75)
     
@@ -27,7 +27,7 @@ class ReaderSettingsViewController: UIViewController, UIPickerViewDataSource, UI
         button.setTitle(" Menu", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 18.0, weight: UIFont.Weight.regular)
         button.sizeToFit()
-        button.addTarget(self, action: #selector(ReaderSettingsViewController.returnMainMenu), for: .touchUpInside)
+        button.addTarget(self, action: #selector(ModeratorSettingsViewController.returnMainMenu), for: .touchUpInside)
         return UIBarButtonItem(customView: button)
     }()
     
@@ -56,7 +56,7 @@ class ReaderSettingsViewController: UIViewController, UIPickerViewDataSource, UI
         button.backgroundColor = UIColor(red: 0.0, green: 1.0, blue: 63.0/255.0, alpha: 0.5)
         button.tintColor = UIColor.white
         button.layer.cornerRadius = 10
-        button.addTarget(self, action: #selector(ReaderSettingsViewController.startReaderMode), for: .touchUpInside)
+        button.addTarget(self, action: #selector(ModeratorSettingsViewController.startReaderMode), for: .touchUpInside)
         return button
     }()
     
@@ -117,13 +117,13 @@ class ReaderSettingsViewController: UIViewController, UIPickerViewDataSource, UI
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Off", for: .normal)
         button.setTitle("On", for: .selected)
-        button.setBackgroundColor(color: ReaderSettingsViewController.lightGrey, forState: .normal)
-        button.setBackgroundColor(color: ReaderSettingsViewController.darkGrey, forState: .selected)
+        button.setBackgroundColor(color: ModeratorSettingsViewController.lightGrey, forState: .normal)
+        button.setBackgroundColor(color: ModeratorSettingsViewController.darkGrey, forState: .selected)
         button.tintColor = UIColor.white
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15.0, weight: UIFont.Weight.light)
         button.clipsToBounds = true
         button.layer.cornerRadius = 10
-        button.addTarget(self, action: #selector(ReaderSettingsViewController.toggleRoundTimer), for: .touchUpInside)
+        button.addTarget(self, action: #selector(ModeratorSettingsViewController.toggleRoundTimer), for: .touchUpInside)
         return button
     }()
     
@@ -237,15 +237,15 @@ class ReaderSettingsViewController: UIViewController, UIPickerViewDataSource, UI
         let roundNum = setRoundPicker.selectedRow(inComponent: 1) + 1
         let tossupTime = getTossupTimeSelected()
         let bonusTime = getBonusTimeSelected()
-        if ((roundNum == 16 || roundNum == 17) && (questionSetNum == 5 || questionSetNum == 6)) {
+        let questionSet = QuestionJSONParser.shared.getQuestionSet(questionSetNum, forRound: roundNum)
+        if questionSet.isEmpty {
             let alertController = UIAlertController(title: "Invalid Set", message: "The chosen question set is not available.", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             alertController.addAction(okAction)
             present(alertController, animated: true, completion: nil)
         } else {
-            let questionSet = QuestionJSONParser.shared.getQuestionSet(questionSetNum, forRound: roundNum)
             let isTimedRound = roundTimerButton.isSelected
-            let readerController = ReaderModeViewController(questionSet: questionSet, index: 0, tossupTime: tossupTime, bonusTime: bonusTime, isTimedRound: isTimedRound, roundTimeRemaining: 480, halfNum: 1, isTimerRunning: false)
+            let readerController = ModeratorModeViewController(questionSet: questionSet, index: 0, tossupTime: tossupTime, bonusTime: bonusTime, isTimedRound: isTimedRound, roundTimeRemaining: 480, halfNum: 1, isTimerRunning: false)
             navigationController?.pushViewController(readerController, animated: true)
         }
     }

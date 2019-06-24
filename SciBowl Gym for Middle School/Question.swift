@@ -72,10 +72,10 @@ func convert(_ orig: String) -> String {
         if !escape && char == "$" {
             if math {
                 math = false
-                result += "[/math]&nbsp;"
+                result += "\\;[/math]&nbsp;"
             } else {
                 math = true
-                result += "&nbsp;[math]"
+                result += "&nbsp;[math]\\;"
             }
         } else {
             if !escape && char == "\\" {

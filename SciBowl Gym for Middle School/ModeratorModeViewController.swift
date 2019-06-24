@@ -9,7 +9,7 @@
 import UIKit
 import RichTextView
 
-class ReaderModeViewController: UIViewController, UIScrollViewDelegate {
+class ModeratorModeViewController: UIViewController, UIScrollViewDelegate {
     var questionSet: [Question]?
     @objc var index: Int = 0
     @objc var seconds: Int = 0
@@ -31,7 +31,7 @@ class ReaderModeViewController: UIViewController, UIScrollViewDelegate {
         button.setTitle(" Menu", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 18.0, weight: UIFont.Weight.regular)
         button.sizeToFit()
-        button.addTarget(self, action: #selector(ReaderModeViewController.returnMainMenu), for: .touchUpInside)
+        button.addTarget(self, action: #selector(ModeratorModeViewController.returnMainMenu), for: .touchUpInside)
         return UIBarButtonItem(customView: button)
     }()
     
@@ -47,7 +47,7 @@ class ReaderModeViewController: UIViewController, UIScrollViewDelegate {
             button.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
             button.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
             button.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-            button.addTarget(self, action: #selector(ReaderModeViewController.finishSet), for: .touchUpInside)
+            button.addTarget(self, action: #selector(ModeratorModeViewController.finishSet), for: .touchUpInside)
         } else {
             button = UIButton(type: .system)
             button.setImage(#imageLiteral(resourceName: "Forward Chevron"), for: .normal)
@@ -57,7 +57,7 @@ class ReaderModeViewController: UIViewController, UIScrollViewDelegate {
             button.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
             button.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
             button.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-            button.addTarget(self, action: #selector(ReaderModeViewController.loadNextQuestion), for: .touchUpInside)
+            button.addTarget(self, action: #selector(ModeratorModeViewController.loadNextQuestion), for: .touchUpInside)
         }
         return UIBarButtonItem(customView: button)
     }()
@@ -147,7 +147,7 @@ class ReaderModeViewController: UIViewController, UIScrollViewDelegate {
         button.backgroundColor = UIColor(red: 0.0, green: 1.0, blue: 63.0/255.0, alpha: 0.5)
         button.tintColor = UIColor.white
         button.layer.cornerRadius = 10
-        button.addTarget(self, action: #selector(ReaderModeViewController.startTimerPressed), for: .touchUpInside)
+        button.addTarget(self, action: #selector(ModeratorModeViewController.startTimerPressed), for: .touchUpInside)
         return button
     }()
     
@@ -197,7 +197,7 @@ class ReaderModeViewController: UIViewController, UIScrollViewDelegate {
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15.0, weight: UIFont.Weight.light)
         button.clipsToBounds = true
         button.layer.cornerRadius = 10
-        button.addTarget(self, action: #selector(ReaderModeViewController.toggleRoundTimer), for: .touchUpInside)
+        button.addTarget(self, action: #selector(ModeratorModeViewController.toggleRoundTimer), for: .touchUpInside)
         return button
     }()
     
@@ -393,7 +393,7 @@ class ReaderModeViewController: UIViewController, UIScrollViewDelegate {
     
     @objc func runRoundTimer() {
         isTimerRunning = true
-        roundTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(ReaderModeViewController.updateRoundTimer), userInfo: nil, repeats: true)
+        roundTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(ModeratorModeViewController.updateRoundTimer), userInfo: nil, repeats: true)
     }
     
     @objc func updateRoundTimer() {
@@ -432,7 +432,7 @@ class ReaderModeViewController: UIViewController, UIScrollViewDelegate {
             roundTimer.invalidate()
         }
         if let questionSet = questionSet {
-            let nextQuestionController = ReaderModeViewController(questionSet: questionSet, index: index+1, tossupTime: tossupTime, bonusTime: bonusTime, isTimedRound: isTimedRound, roundTimeRemaining: roundTimeRemaining, halfNum: halfNum, isTimerRunning: isTimerRunning)
+            let nextQuestionController = ModeratorModeViewController(questionSet: questionSet, index: index+1, tossupTime: tossupTime, bonusTime: bonusTime, isTimedRound: isTimedRound, roundTimeRemaining: roundTimeRemaining, halfNum: halfNum, isTimerRunning: isTimerRunning)
             navigationController?.pushViewController(nextQuestionController, animated: true)
         }
     }
@@ -460,7 +460,7 @@ class ReaderModeViewController: UIViewController, UIScrollViewDelegate {
     }
     
     @objc func runTimer() {
-        questionTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(ReaderModeViewController.updateTimer), userInfo: nil, repeats: true)
+        questionTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(ModeratorModeViewController.updateTimer), userInfo: nil, repeats: true)
     }
     
     @objc func updateTimer() {
