@@ -39,7 +39,7 @@ class StudySettingsViewController: UIViewController, UIPickerViewDataSource, UIP
     @objc lazy var biologyButton: UIButton = {
         let button = UIButton(type: .custom)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Biology", for: .normal)
+        button.setTitle("Life Science", for: .normal)
         button.setBackgroundColor(color: StudySettingsViewController.lightGrey, forState: .normal)
         button.setBackgroundColor(color: StudySettingsViewController.darkGrey, forState: .selected)
         button.tintColor = UIColor.white
@@ -109,7 +109,7 @@ class StudySettingsViewController: UIViewController, UIPickerViewDataSource, UIP
     @objc lazy var physicsButton: UIButton = {
         let button = UIButton(type: .custom)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Physics", for: .normal)
+        button.setTitle("Physical Science", for: .normal)
         button.setBackgroundColor(color: StudySettingsViewController.lightGrey, forState: .normal)
         button.setBackgroundColor(color: StudySettingsViewController.darkGrey, forState: .selected)
         button.tintColor = UIColor.white

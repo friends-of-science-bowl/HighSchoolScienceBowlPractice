@@ -36,12 +36,12 @@ enum Category {
 extension Category: CustomStringConvertible {
     public var description: String {
         switch self {
-        case .biology: return "Biology"
+        case .biology: return "Life Science"
         case .chemistry: return "Chemistry"
         case .earthAndSpace: return "Earth and Space"
         case .energy: return "Energy"
         case .mathematics: return "Mathematics"
-        case .physics: return "Physics"
+        case .physics: return "Physical Science"
         case .generalScience: return "General Science"
         case .computerScience: return "Computer Science"
         }
