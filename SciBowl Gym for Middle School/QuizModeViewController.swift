@@ -104,7 +104,7 @@ class QuizModeViewController: UIViewController, UIScrollViewDelegate {
         button.titleLabel?.numberOfLines = 3
         button.clipsToBounds = true
         button.layer.cornerRadius = 10
-        button.contentHorizontalAlignment = UIControlContentHorizontalAlignment.left
+        button.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.left
         button.contentEdgeInsets = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
         button.addTarget(self, action: #selector(QuizModeViewController.selectOptionW), for: .touchUpInside)
         return button
@@ -121,7 +121,7 @@ class QuizModeViewController: UIViewController, UIScrollViewDelegate {
         button.titleLabel?.numberOfLines = 3
         button.clipsToBounds = true
         button.layer.cornerRadius = 10
-        button.contentHorizontalAlignment = UIControlContentHorizontalAlignment.left
+        button.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.left
         button.contentEdgeInsets = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
         button.addTarget(self, action: #selector(QuizModeViewController.selectOptionX), for: .touchUpInside)
         return button
@@ -138,7 +138,7 @@ class QuizModeViewController: UIViewController, UIScrollViewDelegate {
         button.titleLabel?.numberOfLines = 3
         button.clipsToBounds = true
         button.layer.cornerRadius = 10
-        button.contentHorizontalAlignment = UIControlContentHorizontalAlignment.left
+        button.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.left
         button.contentEdgeInsets = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
         button.addTarget(self, action: #selector(QuizModeViewController.selectOptionY), for: .touchUpInside)
         return button
@@ -155,7 +155,7 @@ class QuizModeViewController: UIViewController, UIScrollViewDelegate {
         button.titleLabel?.numberOfLines = 3
         button.clipsToBounds = true
         button.layer.cornerRadius = 10
-        button.contentHorizontalAlignment = UIControlContentHorizontalAlignment.left
+        button.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.left
         button.contentEdgeInsets = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
         button.addTarget(self, action: #selector(QuizModeViewController.selectOptionZ), for: .touchUpInside)
         return button

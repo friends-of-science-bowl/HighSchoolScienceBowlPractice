@@ -392,7 +392,7 @@ class StudySettingsViewController: UIViewController, UIPickerViewDataSource, UIP
     
     func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
         let title = pickerData[component][row]
-        let attributedString = NSAttributedString(string: title, attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+        let attributedString = NSAttributedString(string: title, attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
         return attributedString
     }
     
