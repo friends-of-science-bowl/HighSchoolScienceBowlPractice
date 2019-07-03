@@ -10,9 +10,11 @@ import GameKit
 import Foundation
 
 struct QuestionJSONParser {
-    let parsedQuestions = {
-        QuestionJSONParser.parseJSONToQuestions()
-    }()
+    var parsedQuestions = [Question]()
+    var byCategory = [Category: [Question]]()
+    var byRound = [Int: [Question]]()
+    var byCategoryRound = [Category: [Int: [Question]]]()
+    var bySetRound = [Int: [Int: [Question]]]()
     
     static let shared = QuestionJSONParser()
     
@@ -23,87 +25,73 @@ struct QuestionJSONParser {
         return jsonData
     }
     
-    static func parseJSONToQuestions() -> [Question] {
-        var questionArray = [Question]()
-        let parsedJSON = parseJsonFile(withName: "questions")
+    init() {
+        let parsedJSON = QuestionJSONParser.parseJsonFile(withName: "questions")
         for questionJSON in parsedJSON {
             if let parsedQuestion = Question(json: questionJSON) {
-                questionArray.append(parsedQuestion)
+                parsedQuestions.append(parsedQuestion)
+                let cat = parsedQuestion.category
+                let round = parsedQuestion.roundNumber
+                let set = parsedQuestion.setNumber
+                // by category
+                if byCategory[cat] == nil {
+                    byCategory[cat] = [Question]()
+                }
+                byCategory[cat]!.append(parsedQuestion)
+                // by round
+                if byRound[round] == nil {
+                    byRound[round] = [Question]()
+                }
+                byRound[round]!.append(parsedQuestion)
+                // by category round
+                if byCategoryRound[cat] == nil {
+                    byCategoryRound[cat] = [Int: [Question]]()
+                }
+                if byCategoryRound[cat]![round] == nil {
+                    byCategoryRound[cat]![round] = [Question]()
+                }
+                byCategoryRound[cat]![round]!.append(parsedQuestion)
+                // by set round
+                if bySetRound[set] == nil {
+                    bySetRound[set] = [Int: [Question]]()
+                }
+                if bySetRound[set]![round] == nil {
+                    bySetRound[set]![round] = [Question]()
+                }
+                bySetRound[set]![round]!.append(parsedQuestion)
             }
         }
-        return questionArray
-    }
-    
-    func parseQuestionForIndex(_ index: Int) -> Question {
-        return parsedQuestions[index]
+        for set in bySetRound.keys {
+            for round in bySetRound[set]!.keys {
+                bySetRound[set]![round]!.sort()
+            }
+        }
     }
     
     func getRandomQuestion() -> Question {
-        let randomIndex = GKRandomSource.sharedRandom().nextInt(upperBound: parsedQuestions.count)
-        return QuestionJSONParser.shared.parseQuestionForIndex(randomIndex)
+        return parsedQuestions.randomElement()!
     }
     
     func getQuestionForCategory(_ category: Category) -> Question {
-        while true {
-            let question = QuestionJSONParser.shared.getRandomQuestion()
-            if question.category == category {
-                return question
-            }
-        }
-        // Will never reach this state because of limited enum values
+        return byCategory[category]!.randomElement()!
     }
     
     func getQuestionForCategory(_ category: Category, andRound round: Int) -> Question {
-        while true {
-            let question = QuestionJSONParser.shared.getRandomQuestion()
-            if question.category == category && question.roundNumber == round {
-                return question
-            }
-        }
-        // Will never reach this state because of limited enum values
+        return byCategoryRound[category]![round]!.randomElement()!
     }
     
     func getQuestionForRound(_ round: Int) -> Question {
-        while true {
-            let question = QuestionJSONParser.shared.getRandomQuestion()
-            if question.roundNumber == round {
-                return question
-            }
-        }
-        // Will never reach this state because of limited round number selections
+        return byRound[round]!.randomElement()!
     }
     
     func getQuestionSet(_ set: Int, forRound round: Int) -> [Question] {
-        var questions = [Question]()
-        for question in QuestionJSONParser.shared.parsedQuestions {
-            if question.setNumber == set && question.roundNumber == round {
-                questions.append(question)
-            }
-        }
-        return questions.sorted(by: sortQuestionsByNumberAndType)
-    }
-    
-    func sortQuestionsByNumberAndType(this: Question, that: Question) -> Bool {
-        let thisFirst: Bool
-        if this.questionNumber < that.questionNumber {
-            thisFirst = true
-        } else if this.questionNumber == that.questionNumber {
-            if this.questionType == .tossup {
-                thisFirst = true
-            } else {
-                thisFirst = false
-            }
-        } else {
-            thisFirst = false
-        }
-        
-        return thisFirst
+        return bySetRound[set]![round]!
     }
     
     func getMCQuestion() -> Question {
         while true {
-            let question = QuestionJSONParser.shared.getRandomQuestion()
-            if question.answerType == .multipleChoice && question.answerChoices!.count == 4 {
+            let question = getRandomQuestion()
+            if question.answerType == .multipleChoice {
                 return question
             }
         }
@@ -111,8 +99,8 @@ struct QuestionJSONParser {
     
     func getMCQuestionForCategory(_ category: Category) -> Question {
         while true {
-            let question = QuestionJSONParser.shared.getMCQuestion()
-            if question.category == category {
+            let question = getQuestionForCategory(category)
+            if question.answerType == .multipleChoice {
                 return question
             }
         }

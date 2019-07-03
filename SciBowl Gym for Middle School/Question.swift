@@ -8,50 +8,6 @@
 
 import Foundation
 
-enum AnswerType {
-    case multipleChoice
-    case shortAnswer
-    
-    init(typeString: String) {
-        switch typeString {
-        case "MC": self = .multipleChoice
-        case "SA": self = .shortAnswer
-        default: self = .shortAnswer
-        }
-    }
-}
-
-extension AnswerType: CustomStringConvertible {
-    public var description: String {
-        switch self {
-        case .multipleChoice: return "Multiple Choice"
-        case .shortAnswer: return "Short Answer"
-        }
-    }
-}
-
-enum QuestionType {
-    case tossup
-    case bonus
-    
-    init (typeString: String) {
-        switch typeString {
-        case "T": self = .tossup
-        case "B": self = .bonus
-        default: self = .tossup
-        }
-    }
-}
-
-extension QuestionType: CustomStringConvertible {
-    public var description: String {
-        switch self {
-        case .tossup: return "Tossup"
-        case .bonus: return "Bonus"
-        }
-    }
-}
-
 struct Question {
     let questionText: String
     let category: Category
@@ -89,7 +45,7 @@ func convert(_ orig: String) -> String {
     return result
 }
 
-extension Question {
+extension Question: Comparable {
     struct Key {
         static let questionText = "qTxt"
         static let questionAnswer = "qAns"
@@ -103,15 +59,17 @@ extension Question {
     }
     
     init?(json: [String: Any]) {
-        guard let qText = json[Key.questionText] as? String,
+        guard
+            let qText = json[Key.questionText] as? String,
             let qAnswer = json[Key.questionAnswer] as? String,
             let catString = json[Key.category] as? String,
             let setNumber = json[Key.setNumber] as? Int,
             let roundNumber = json[Key.roundNumber] as? Int,
             let questionNumber = json[Key.questionNumber] as? Int,
             let answerType = json[Key.answerType] as? String,
-            let questionType = json[Key.questionType] as? String else {
-                return nil;
+            let questionType = json[Key.questionType] as? String
+        else {
+            return nil;
         }
         
         self.questionText = convert(qText)
@@ -124,12 +82,25 @@ extension Question {
         self.questionType = QuestionType(typeString: questionType)
         
         if self.answerType == .multipleChoice {
-            guard let ansChoices = json[Key.answerChoices] as? [String] else {
+            guard let ansChoices = json[Key.answerChoices] as? [String]
+            else {
                 return nil;
             }
             self.answerChoices = ansChoices.map{ convert($0) }
         } else {
             self.answerChoices = nil
         }
+    }
+    
+    func id() -> Int {
+        return (setNumber * 10000 + roundNumber * 100 + questionNumber)
+            * (questionType == QuestionType.tossup ? -1 : 1)
+    }
+    
+    static func < (this: Question, that: Question) -> Bool {
+        if this.questionNumber == that.questionNumber {
+            return this.questionType == .tossup
+        }
+        return this.questionNumber < that.questionNumber
     }
 }
