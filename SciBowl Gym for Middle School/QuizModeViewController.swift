@@ -83,81 +83,130 @@ class QuizModeViewController: UIViewController, UIScrollViewDelegate {
         return label
     }()
     
-    @objc lazy var questionTextLabel: UILabel = {
-        let label = UILabel()
+    @objc lazy var questionTextLabel: UIView = {
+        let label = RichTextView(
+            font: UIFont.systemFont(ofSize: 16.0, weight: UIFont.Weight.medium),
+            textColor: UIColor.white,
+            frame: CGRect.zero
+        )
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 17.0, weight: UIFont.Weight.medium)
-        label.textColor = UIColor.white
-        label.text = self.question?.questionText
+        label.update(input: self.question?.questionText)
         return label
     }()
     
     @objc lazy var optionWButton: UIButton = {
+        let label = RichTextView(
+            font: UIFont.systemFont(ofSize: 13.0, weight: UIFont.Weight.light),
+            textColor: UIColor.white,
+            frame: CGRect.zero
+        )
+        label.isUserInteractionEnabled = false
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.update(input: self.question?.answerChoices?[0])
+
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle(self.question?.answerChoices?[0], for: .normal)
         button.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.25)
-        button.setTitleColor(UIColor.white, for: .normal)
-        button.setTitleColor(UIColor.white, for: .disabled)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 13.0, weight: UIFont.Weight.light)
-        button.titleLabel?.numberOfLines = 3
         button.clipsToBounds = true
         button.layer.cornerRadius = 10
-        button.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.left
-        button.contentEdgeInsets = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
         button.addTarget(self, action: #selector(QuizModeViewController.selectOptionW), for: .touchUpInside)
+
+        button.addSubview(label)
+        button.bringSubviewToFront(label)
+        NSLayoutConstraint.activate([
+            label.topAnchor.constraint(equalTo: button.topAnchor, constant: 12),
+            label.leadingAnchor.constraint(equalTo: button.leadingAnchor, constant: 6),
+            label.trailingAnchor.constraint(equalTo: button.trailingAnchor, constant: -6),
+            button.bottomAnchor.constraint(equalTo: label.bottomAnchor, constant: 12)
+        ])
+        
         return button
     }()
-    
+
     @objc lazy var optionXButton: UIButton = {
+        let label = RichTextView(
+            font: UIFont.systemFont(ofSize: 13.0, weight: UIFont.Weight.light),
+            textColor: UIColor.white,
+            frame: CGRect.zero
+        )
+        label.isUserInteractionEnabled = false
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.update(input: self.question?.answerChoices?[1])
+        
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle(self.question?.answerChoices?[1], for: .normal)
         button.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.25)
-        button.setTitleColor(UIColor.white, for: .normal)
-        button.setTitleColor(UIColor.white, for: .disabled)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 13.0, weight: UIFont.Weight.light)
-        button.titleLabel?.numberOfLines = 3
         button.clipsToBounds = true
         button.layer.cornerRadius = 10
-        button.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.left
-        button.contentEdgeInsets = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
         button.addTarget(self, action: #selector(QuizModeViewController.selectOptionX), for: .touchUpInside)
+
+        button.addSubview(label)
+        button.bringSubviewToFront(label)
+        NSLayoutConstraint.activate([
+            label.topAnchor.constraint(equalTo: button.topAnchor, constant: 12),
+            label.leadingAnchor.constraint(equalTo: button.leadingAnchor, constant: 6),
+            label.trailingAnchor.constraint(equalTo: button.trailingAnchor, constant: -6),
+            button.bottomAnchor.constraint(equalTo: label.bottomAnchor, constant: 12)
+        ])
+        
         return button
     }()
     
     @objc lazy var optionYButton: UIButton = {
+        let label = RichTextView(
+            font: UIFont.systemFont(ofSize: 13.0, weight: UIFont.Weight.light),
+            textColor: UIColor.white,
+            frame: CGRect.zero
+        )
+        label.isUserInteractionEnabled = false
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.update(input: self.question?.answerChoices?[2])
+        
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle(self.question?.answerChoices?[2], for: .normal)
         button.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.25)
-        button.setTitleColor(UIColor.white, for: .normal)
-        button.setTitleColor(UIColor.white, for: .disabled)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 13.0, weight: UIFont.Weight.light)
-        button.titleLabel?.numberOfLines = 3
         button.clipsToBounds = true
         button.layer.cornerRadius = 10
-        button.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.left
-        button.contentEdgeInsets = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
         button.addTarget(self, action: #selector(QuizModeViewController.selectOptionY), for: .touchUpInside)
+
+        button.addSubview(label)
+        button.bringSubviewToFront(label)
+        NSLayoutConstraint.activate([
+            label.topAnchor.constraint(equalTo: button.topAnchor, constant: 12),
+            label.leadingAnchor.constraint(equalTo: button.leadingAnchor, constant: 6),
+            label.trailingAnchor.constraint(equalTo: button.trailingAnchor, constant: -6),
+            button.bottomAnchor.constraint(equalTo: label.bottomAnchor, constant: 12)
+        ])
+        
         return button
     }()
     
     @objc lazy var optionZButton: UIButton = {
+        let label = RichTextView(
+            font: UIFont.systemFont(ofSize: 13.0, weight: UIFont.Weight.light),
+            textColor: UIColor.white,
+            frame: CGRect.zero
+        )
+        label.isUserInteractionEnabled = false
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.update(input: self.question?.answerChoices?[3])
+
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle(self.question?.answerChoices?[3], for: .normal)
         button.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.25)
-        button.setTitleColor(UIColor.white, for: .normal)
-        button.setTitleColor(UIColor.white, for: .disabled)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 13.0, weight: UIFont.Weight.light)
-        button.titleLabel?.numberOfLines = 3
         button.clipsToBounds = true
         button.layer.cornerRadius = 10
-        button.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.left
-        button.contentEdgeInsets = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
         button.addTarget(self, action: #selector(QuizModeViewController.selectOptionZ), for: .touchUpInside)
+
+        button.addSubview(label)
+        button.bringSubviewToFront(label)
+        NSLayoutConstraint.activate([
+            label.topAnchor.constraint(equalTo: button.topAnchor, constant: 12),
+            label.leadingAnchor.constraint(equalTo: button.leadingAnchor, constant: 6),
+            label.trailingAnchor.constraint(equalTo: button.trailingAnchor, constant: -6),
+            button.bottomAnchor.constraint(equalTo: label.bottomAnchor, constant: 12)
+        ])
+
         return button
     }()
     
@@ -172,7 +221,7 @@ class QuizModeViewController: UIViewController, UIScrollViewDelegate {
     
     init(category: Category?, stats: QuizModeStats?, tossupTime: Int, bonusTime: Int) {
         self.category = category
-        if let category = category {
+        if category != nil {
             self.question = QuestionJSONParser.shared.getMCQuestionForCategory(category)
         } else {
             self.question = QuestionJSONParser.shared.getMCQuestion()
@@ -244,7 +293,6 @@ class QuizModeViewController: UIViewController, UIScrollViewDelegate {
             optionWButton.topAnchor.constraint(equalTo: questionTextLabel.bottomAnchor, constant: 10),
             optionWButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             optionWButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            optionWButton.heightAnchor.constraint(equalToConstant: 50)
         ])
         
         scrollView.addSubview(optionXButton)
@@ -252,7 +300,6 @@ class QuizModeViewController: UIViewController, UIScrollViewDelegate {
             optionXButton.topAnchor.constraint(equalTo: optionWButton.bottomAnchor, constant: 7),
             optionXButton.leadingAnchor.constraint(equalTo: optionWButton.leadingAnchor),
             optionXButton.trailingAnchor.constraint(equalTo: optionWButton.trailingAnchor),
-            optionXButton.heightAnchor.constraint(equalToConstant: 50)
         ])
         
         scrollView.addSubview(optionYButton)
@@ -260,7 +307,6 @@ class QuizModeViewController: UIViewController, UIScrollViewDelegate {
             optionYButton.topAnchor.constraint(equalTo: optionXButton.bottomAnchor, constant: 7),
             optionYButton.leadingAnchor.constraint(equalTo: optionXButton.leadingAnchor),
             optionYButton.trailingAnchor.constraint(equalTo: optionXButton.trailingAnchor),
-            optionYButton.heightAnchor.constraint(equalToConstant: 50)
         ])
         
         scrollView.addSubview(optionZButton)
@@ -268,7 +314,6 @@ class QuizModeViewController: UIViewController, UIScrollViewDelegate {
             optionZButton.topAnchor.constraint(equalTo: optionYButton.bottomAnchor, constant: 7),
             optionZButton.leadingAnchor.constraint(equalTo: optionYButton.leadingAnchor),
             optionZButton.trailingAnchor.constraint(equalTo: optionYButton.trailingAnchor),
-            optionZButton.heightAnchor.constraint(equalToConstant: 50)
         ])
         
         scrollView.addSubview(timerLabel)
@@ -295,7 +340,7 @@ class QuizModeViewController: UIViewController, UIScrollViewDelegate {
     }
     
     @objc func disableButtons() {
-        optionWButton.isEnabled = false
+        optionWButton.isUserInteractionEnabled = false
         optionXButton.isEnabled = false
         optionYButton.isEnabled = false
         optionZButton.isEnabled = false
